@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: flask-app
+    plan: free
+    runtime: python  # Add the appropriate runtime here, e.g., python
+    buildCommand: ""
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
