@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Text to Speech Generator</title>
+    <link rel="stylesheet" href="css/pico.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .form-group textarea,
+        .form-group select,
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical; /* Permite el redimensionamiento solo vertical */
+        }
+        .form-group button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Text to Speech Generator</h1>
+        <form action="/generate" method="post">
+            <div class="form-group">
+                <label for="text">Text:</label>
+                <textarea id="text" name="text" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="tld">Voice:</label>
+                <select id="tld" name="tld">
+                    {% for lang, tlds in tld_options.items() %}
+                        <optgroup label="{{ languages[lang] }}">
+                            {% for tld, description in tlds.items() %}
+                                <option value="{{ tld }}">{{ description }}</option>
+                            {% endfor %}
+                        </optgroup>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="slow">Speed:</label>
+                <select id="slow" name="slow">
+                    <option value="false">Normal</option>
+                    <option value="true">Slow</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit">Generate and download</button>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <p>hecho por santiagoSito con ❤️</p>
+    </footer>
+</body>
+</html>
